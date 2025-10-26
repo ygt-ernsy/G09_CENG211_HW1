@@ -4,24 +4,20 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- * GamersFileIo
+ * GameFileIO
  */
-public class GamersFileIo {
+public class GameFileIO {
 
 	private String filePath;
 
-	public GamersFileIo() {
-		this(null);
-	}
-
-	public GamersFileIo(String filePath) {
+	public GameFileIO(String filePath) {
 		this.filePath = filePath;
 	}
 
-	public Gamer[] getGamers() throws IOException {
+	public Game[] getGames() throws IOException {
 
 		int count = getRowCount();
-		Gamer[] gamerArray = new Gamer[count];
+		Game[] gameArray = new Game[count];
 
 		BufferedReader inputStream = null;
 
@@ -32,7 +28,7 @@ public class GamersFileIo {
 			inputStream.readLine();
 			for (int i = 0; i < count; i++) {
 				String csvLine = inputStream.readLine();
-				gamerArray[i] = parseGamer(csvLine);
+				gameArray[i] = parseGame(csvLine);
 			}
 
 		} finally {
@@ -41,7 +37,7 @@ public class GamersFileIo {
 			}
 		}
 
-		return gamerArray;
+		return gameArray;
 	}
 
 	private int getRowCount() throws IOException {
@@ -65,15 +61,13 @@ public class GamersFileIo {
 		return count;
 	}
 
-	private Gamer parseGamer(String csvLine) {
+	private Game parseGame(String csvLine) {
 		StringTokenizer tokenizer = new StringTokenizer(csvLine, ",");
 
 		int id = Integer.parseInt(tokenizer.nextToken());
-		String nickname = tokenizer.nextToken();
-		String name = tokenizer.nextToken();
-		String phone = tokenizer.nextToken();
-		int exp = Integer.parseInt(tokenizer.nextToken());
+		String gameName = tokenizer.nextToken();
+		int basePointPerRound = Integer.parseInt(tokenizer.nextToken());
 
-		return new Gamer(id, nickname, name, phone, exp);
+		return new Game(id, gameName, basePointPerRound);
 	}
 }
