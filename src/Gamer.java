@@ -12,6 +12,12 @@ public class Gamer {
 		this(0, null, null, null, 0);
 	}
 
+	// Copy constructor
+	public Gamer(Gamer gamer) {
+		this(gamer.getId(), gamer.getNickname(), gamer.getName(), gamer.getPhoneNumber(),
+				gamer.getExperianceYears());
+	}
+
 	public Gamer(int id, String nickname, String name, String phoneNumber, int experianceYears) {
 		this.id = id;
 		this.nickname = nickname;
@@ -38,5 +44,11 @@ public class Gamer {
 
 	public int getExperianceYears() {
 		return experianceYears;
+	}
+
+	@Override
+	public String toString() {
+		return "Id: " + id + " Nickname: " + nickname + " Name: " + " PhoneNumber: " + " ExperianceYears: "
+				+ experianceYears;
 	}
 }
