@@ -7,31 +7,43 @@ import java.util.StringTokenizer;
 /**
  * GamersFileIo
  * 
- * Handles reading gamer information from a CSV file and converting each record into a Gamer object.
+ * Handles reading gamer information from a CSV file and converting each record
+ * into a Gamer object.
  * Provides methods to load all gamers and to count the number of gamer records.
  */
-public class GamersFileIo {
+public class GamersFileIO {
 
 	private String filePath; // Path to the CSV file containing gamer data
 
 	/**
 	 * Default constructor sets filePath to null.
 	 */
-	public GamersFileIo() {
-		this(null);
+	public GamersFileIO() {
+	}
+
+	/**
+	 * Copy constructor
+	 *
+	 * @param gamersFileIO an object
+	 */
+	public GamersFileIO(GamersFileIO gamersFileIO) {
+		this(gamersFileIO.getFilePath());
 	}
 
 	/**
 	 * Constructor with file path.
+	 * 
 	 * @param filePath Path to the CSV file
 	 */
-	public GamersFileIo(String filePath) {
+	public GamersFileIO(String filePath) {
 		this.filePath = filePath;
 	}
 
 	/**
-	 * Reads all gamer records from the CSV file and returns them as an array of Gamer objects.
-	 * Skips the header row, parses each line, and handles malformed lines gracefully.
+	 * Reads all gamer records from the CSV file and returns them as an array of
+	 * Gamer objects.
+	 * Skips the header row, parses each line, and handles malformed lines
+	 * gracefully.
 	 * 
 	 * @return Array of Gamer objects parsed from the file
 	 * @throws IOException If an I/O error occurs
@@ -121,5 +133,9 @@ public class GamersFileIo {
 			System.out.println("  Line: " + csvLine);
 			return null;
 		}
+	}
+
+	public String getFilePath() {
+		return filePath;
 	}
 }
