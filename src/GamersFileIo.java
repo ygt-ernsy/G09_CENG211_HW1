@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 /**
@@ -66,14 +67,25 @@ public class GamersFileIo {
 	}
 
 	private Gamer parseGamer(String csvLine) {
-		StringTokenizer tokenizer = new StringTokenizer(csvLine, ",");
+		try {
 
-		int id = Integer.parseInt(tokenizer.nextToken());
-		String nickname = tokenizer.nextToken();
-		String name = tokenizer.nextToken();
-		String phone = tokenizer.nextToken();
-		int exp = Integer.parseInt(tokenizer.nextToken());
+			StringTokenizer tokenizer = new StringTokenizer(csvLine, ",");
 
-		return new Gamer(id, nickname, name, phone, exp);
+			int id = Integer.parseInt(tokenizer.nextToken());
+			String nickname = tokenizer.nextToken();
+			String name = tokenizer.nextToken();
+			String phone = tokenizer.nextToken();
+			int exp = Integer.parseInt(tokenizer.nextToken());
+
+			return new Gamer(id, nickname, name, phone, exp);
+		} catch (NumberFormatException e) {
+			System.out.println("Warning: Skipping invalid gamer line. Could not parse number.");
+			System.out.println("  Line: " + csvLine);
+			return null;
+		} catch (NoSuchElementException e) {
+			System.out.println("Warning: Skipping invalid gamer line. Missing columns.");
+			System.out.println("  Line: " + csvLine);
+			return null;
+		}
 	}
 }
