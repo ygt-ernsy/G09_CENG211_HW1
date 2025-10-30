@@ -1,6 +1,0 @@
-/**
- * MatchManagment
- */
-public class MatchManagment {
-
-}
