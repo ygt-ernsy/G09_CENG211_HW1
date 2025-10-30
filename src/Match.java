@@ -1,55 +1,83 @@
 /**
  * Match
+ * 
+ * Represents a match played by a gamer, consisting of multiple games, rounds, and various points calculations.
+ * Calculates raw points, skill points, bonus points, and total match points based on input and game data.
  */
 public class Match {
-	private int id;
-	private Game[] games; // Assign randomly
-	private int[] rounds; // Calculate randomly
-	private Gamer gamer; // Given to constructor
-	private int rawPoints; // Calculated by method
-	private int skillPoints; // Calculated by method
-	private int bonusPoints; // Calculated by method
-	private int matchPoints; // Calculated in constructor
+	private int id;                // Unique identifier for the match
+	private Game[] games;          // Array of games played in this match (assigned randomly)
+	private int[] rounds;          // Number of rounds played for each game (calculated randomly)
+	private Gamer gamer;           // Gamer who played this match (provided to constructor)
+	private int rawPoints;         // Total points scored before skill and bonus (calculated by method)
+	private int skillPoints;       // Points after applying gamer's experience (calculated by method)
+	private int bonusPoints;       // Additional bonus points based on raw points (calculated by method)
+	private int matchPoints;       // Final match points (skillPoints + bonusPoints; calculated in constructor)
 
+	/**
+	 * Default constructor initializes fields to default values.
+	 */
 	public Match() {
 		this(0, null, null, null);
 	}
 
+	/**
+	 * Copy constructor creates a new Match object from another Match instance.
+	 * @param match The Match instance to copy
+	 */
 	public Match(Match match) {
 		this(match.getId(), match.getGames(), match.getRounds(), match.getGamer());
 	}
 
+	/**
+	 * Constructs a Match with all fields specified.
+	 * Calculates raw, skill, bonus, and match points upon creation.
+	 * 
+	 * @param id Unique identifier for the match
+	 * @param games Array of games played in the match
+	 * @param rounds Number of rounds played for each game
+	 * @param gamer Gamer who played the match
+	 */
 	public Match(int id, Game[] games, int[] rounds, Gamer gamer) {
 		this.id = id;
 		this.games = games;
 		this.rounds = rounds;
 		this.gamer = gamer;
-		this.rawPoints = calculateRawPoints();
-		this.skillPoints = calculateSkillPoints();
-		this.bonusPoints = calculateBonusPoints();
-		this.matchPoints = this.skillPoints + this.bonusPoints;
+		this.rawPoints = calculateRawPoints();        // Calculate raw points based on games and rounds
+		this.skillPoints = calculateSkillPoints();    // Calculate skill points based on experience
+		this.bonusPoints = calculateBonusPoints();    // Calculate bonus points based on raw points
+		this.matchPoints = this.skillPoints + this.bonusPoints; // Sum for total match points
 	}
 
+	/**
+	 * Calculates the total raw points for the match based on games played and rounds.
+	 * @return The sum of (rounds[i] * basePointPerRound) for each game
+	 */
 	private int calculateRawPoints() {
 		int points = 0;
-
 		for (int i = 0; i < rounds.length; i++) {
 			points += rounds[i] * games[i].getBasePointPerRound();
 		}
-
 		return points;
 	}
 
+	/**
+	 * Calculates the skill points, applying a bonus based on the gamer's experience.
+	 * Each year of experience (up to 10) gives an additional 2% to the raw points.
+	 * @return The skill points as an integer
+	 */
 	private int calculateSkillPoints() {
-		int gamerExperianceUsed = Math.min(gamer.getExperianceYears(), 10);
-		double points = Math.floor(rawPoints * (1 + gamerExperianceUsed * 0.02));
-
+		int gamerExperianceUsed = Math.min(gamer.getExperianceYears(), 10); // Max 10 years considered
+		double points = Math.floor(rawPoints * (1 + gamerExperianceUsed * 0.02)); // 2% per year
 		return (int) points;
 	}
 
+	/**
+	 * Calculates bonus points based on the raw points scored.
+	 * @return The bonus points awarded for this match
+	 */
 	private int calculateBonusPoints() {
-		int index = rawPoints / 200; // TODO: Check if it is skill points
-
+		int index = rawPoints / 200; // Divide raw points by 200 to determine bonus bracket
 		switch (index) {
 			case 0: // For 0-199
 				return 10;
@@ -62,43 +90,55 @@ public class Match {
 		}
 	}
 
+	/** @return The skill points for this match */
 	public int getSkillPoints() {
 		return skillPoints;
 	}
 
+	/** @return The array of rounds played per game */
 	public int[] getRounds() {
 		return rounds;
 	}
 
+	/** @return The raw points scored in this match */
 	public int getRawPoints() {
 		return rawPoints;
 	}
 
+	/** @return The total match points (skill + bonus) */
 	public int getMatchPoints() {
 		return matchPoints;
 	}
 
+	/** @return The unique ID of the match */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Returns a copy of the games array for this match.
+	 * @return An array containing the games played in the match
+	 */
 	public Game[] getGames() {
 		Game[] tempGames = new Game[3];
 		int i = 0;
-
 		for (Game game : this.games) {
 			tempGames[i] = game;
 			i++;
 		}
-
 		return tempGames;
 	}
 
+	/**
+	 * Returns a copy of the Gamer object for this match.
+	 * @return A copy of the gamer who played the match
+	 */
 	public Gamer getGamer() {
 		Gamer tempGamer = new Gamer(gamer);
 		return tempGamer;
 	}
 
+	/** @return The bonus points awarded for this match */
 	public int getBonusPoints() {
 		return bonusPoints;
 	}
