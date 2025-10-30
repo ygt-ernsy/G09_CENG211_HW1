@@ -1,18 +1,20 @@
 /**
  * Match
  * 
- * Represents a match played by a gamer, consisting of multiple games, rounds, and various points calculations.
- * Calculates raw points, skill points, bonus points, and total match points based on input and game data.
+ * Represents a match played by a gamer, consisting of multiple games, rounds,
+ * and various points calculations.
+ * Calculates raw points, skill points, bonus points, and total match points
+ * based on input and game data.
  */
 public class Match {
-	private int id;                // Unique identifier for the match
-	private Game[] games;          // Array of games played in this match (assigned randomly)
-	private int[] rounds;          // Number of rounds played for each game (calculated randomly)
-	private Gamer gamer;           // Gamer who played this match (provided to constructor)
-	private int rawPoints;         // Total points scored before skill and bonus (calculated by method)
-	private int skillPoints;       // Points after applying gamer's experience (calculated by method)
-	private int bonusPoints;       // Additional bonus points based on raw points (calculated by method)
-	private int matchPoints;       // Final match points (skillPoints + bonusPoints; calculated in constructor)
+	private int id; // Unique identifier for the match
+	private Game[] games; // Array of games played in this match (assigned randomly)
+	private int[] rounds; // Number of rounds played for each game (calculated randomly)
+	private Gamer gamer; // Gamer who played this match (provided to constructor)
+	private int rawPoints; // Total points scored before skill and bonus (calculated by method)
+	private int skillPoints; // Points after applying gamer's experience (calculated by method)
+	private int bonusPoints; // Additional bonus points based on raw points (calculated by method)
+	private int matchPoints; // Final match points (skillPoints + bonusPoints; calculated in constructor)
 
 	/**
 	 * Default constructor initializes fields to default values.
@@ -23,6 +25,7 @@ public class Match {
 
 	/**
 	 * Copy constructor creates a new Match object from another Match instance.
+	 * 
 	 * @param match The Match instance to copy
 	 */
 	public Match(Match match) {
@@ -33,24 +36,26 @@ public class Match {
 	 * Constructs a Match with all fields specified.
 	 * Calculates raw, skill, bonus, and match points upon creation.
 	 * 
-	 * @param id Unique identifier for the match
-	 * @param games Array of games played in the match
+	 * @param id     Unique identifier for the match
+	 * @param games  Array of games played in the match
 	 * @param rounds Number of rounds played for each game
-	 * @param gamer Gamer who played the match
+	 * @param gamer  Gamer who played the match
 	 */
 	public Match(int id, Game[] games, int[] rounds, Gamer gamer) {
 		this.id = id;
 		this.games = games;
 		this.rounds = rounds;
 		this.gamer = gamer;
-		this.rawPoints = calculateRawPoints();        // Calculate raw points based on games and rounds
-		this.skillPoints = calculateSkillPoints();    // Calculate skill points based on experience
-		this.bonusPoints = calculateBonusPoints();    // Calculate bonus points based on raw points
+		this.rawPoints = calculateRawPoints(); // Calculate raw points based on games and rounds
+		this.skillPoints = calculateSkillPoints(); // Calculate skill points based on experience
+		this.bonusPoints = calculateBonusPoints(); // Calculate bonus points based on raw points
 		this.matchPoints = this.skillPoints + this.bonusPoints; // Sum for total match points
 	}
 
 	/**
-	 * Calculates the total raw points for the match based on games played and rounds.
+	 * Calculates the total raw points for the match based on games played and
+	 * rounds.
+	 * 
 	 * @return The sum of (rounds[i] * basePointPerRound) for each game
 	 */
 	private int calculateRawPoints() {
@@ -62,8 +67,10 @@ public class Match {
 	}
 
 	/**
-	 * Calculates the skill points, applying a bonus based on the gamer's experience.
+	 * Calculates the skill points, applying a bonus based on the gamer's
+	 * experience.
 	 * Each year of experience (up to 10) gives an additional 2% to the raw points.
+	 * 
 	 * @return The skill points as an integer
 	 */
 	private int calculateSkillPoints() {
@@ -74,6 +81,7 @@ public class Match {
 
 	/**
 	 * Calculates bonus points based on the raw points scored.
+	 * 
 	 * @return The bonus points awarded for this match
 	 */
 	private int calculateBonusPoints() {
@@ -117,6 +125,7 @@ public class Match {
 
 	/**
 	 * Returns a copy of the games array for this match.
+	 * 
 	 * @return An array containing the games played in the match
 	 */
 	public Game[] getGames() {
@@ -131,6 +140,7 @@ public class Match {
 
 	/**
 	 * Returns a copy of the Gamer object for this match.
+	 * 
 	 * @return A copy of the gamer who played the match
 	 */
 	public Gamer getGamer() {

@@ -4,11 +4,11 @@
  * Represents a gamer/user with identifying information and experience details.
  */
 public class Gamer {
-	private int id;                 // Unique identifier for the gamer
-	private String nickname;        // Gamer's nickname
-	private String name;            // Gamer's real name
-	private String phoneNumber;     // Gamer's phone number
-	private int experianceYears;    // Number of years of experience
+	private int id; // Unique identifier for the gamer
+	private String nickname; // Gamer's nickname
+	private String name; // Gamer's real name
+	private String phoneNumber; // Gamer's phone number
+	private int experianceYears; // Number of years of experience
 
 	/**
 	 * Default constructor initializes fields to default values.
@@ -19,6 +19,7 @@ public class Gamer {
 
 	/**
 	 * Copy constructor creates a new Gamer from another Gamer object.
+	 * 
 	 * @param gamer The gamer instance to copy
 	 */
 	public Gamer(Gamer gamer) {
@@ -28,10 +29,11 @@ public class Gamer {
 
 	/**
 	 * Constructs a Gamer with all fields specified.
-	 * @param id Unique identifier for the gamer
-	 * @param nickname Gamer's nickname
-	 * @param name Gamer's real name
-	 * @param phoneNumber Gamer's phone number
+	 * 
+	 * @param id              Unique identifier for the gamer
+	 * @param nickname        Gamer's nickname
+	 * @param name            Gamer's real name
+	 * @param phoneNumber     Gamer's phone number
 	 * @param experianceYears Number of years of experience
 	 */
 	public Gamer(int id, String nickname, String name, String phoneNumber, int experianceYears) {
