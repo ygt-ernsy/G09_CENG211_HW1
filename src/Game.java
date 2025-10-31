@@ -42,6 +42,7 @@ public class Game {
     }
 
     // Returns a string representation of the Game object
+    @Override
     public String toString() {
         return "Id: " + getId() + " Name: " + getName() + " BasePoingPerRound: " + getBasePointPerRound();
     }

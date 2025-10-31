@@ -11,13 +11,6 @@ public class Gamer {
     private int experienceYears; // Number of years of experience
 
     /**
-     * Default constructor initializes fields to default values.
-     */
-    public Gamer() {
-        this(0, null, null, null, 0);
-    }
-
-    /**
      * Copy constructor creates a new Gamer from another Gamer object.
      * 
      * @param gamer The gamer instance to copy
@@ -37,6 +30,15 @@ public class Gamer {
      * @param experianceYears Number of years of experience
      */
     public Gamer(int id, String nickname, String name, String phoneNumber, int experianceYears) {
+        if (id == 0)
+            throw new IllegalArgumentException("Id cannot be 0");
+        if (nickname == null)
+            throw new NullPointerException();
+        if (name == null)
+            throw new NullPointerException();
+        if (phoneNumber == null)
+            throw new NullPointerException();
+
         this.id = id;
         this.nickname = nickname;
         this.name = name;
