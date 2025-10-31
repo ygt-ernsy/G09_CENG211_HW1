@@ -17,13 +17,6 @@ public class Match {
     private int matchPoints; // Final match points (skillPoints + bonusPoints; calculated in constructor)
 
     /**
-     * Default constructor initializes fields to default values.
-     */
-    public Match() {
-        this(0, null, null, null);
-    }
-
-    /**
      * Copy constructor creates a new Match object from another Match instance.
      * 
      * @param match The Match instance to copy
@@ -42,6 +35,15 @@ public class Match {
      * @param gamer  Gamer who played the match
      */
     public Match(int id, Game[] games, int[] rounds, Gamer gamer) {
+        if (id == 0)
+            throw new IllegalArgumentException("Id cannot be 0");
+        if (games == null || games.length != 3)
+            throw new NullPointerException();
+        if (rounds == null || rounds.length != 3)
+            throw new NullPointerException();
+        if (gamer == null)
+            throw new NullPointerException();
+
         this.id = id;
         this.games = games;
         this.rounds = rounds;
@@ -150,5 +152,17 @@ public class Match {
     /** @return The bonus points awarded for this match */
     public int getBonusPoints() {
         return bonusPoints;
+    }
+
+    @Override
+    public String toString() {
+        String gamerName = (this.gamer != null) ? this.gamer.getNickname() : "null";
+
+        return "Match ID:" + this.id +
+                "\nGamer: " + gamerName +
+                "\nPoints: " + this.matchPoints +
+                "\nR: " + this.rawPoints +
+                "\nS: " + this.skillPoints +
+                "\nB: " + this.bonusPoints;
     }
 }
