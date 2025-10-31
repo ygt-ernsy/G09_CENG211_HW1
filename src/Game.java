@@ -6,11 +6,6 @@ public class Game {
     // Base points awarded per round in the game
     private int basePointPerRound;
 
-    // Default constructor initializing fields to default values
-    public Game() {
-        this(0, null, 0);
-    }
-
     // Copy constructor to create a new Game object with the same values as another
     // Game object
     public Game(Game game) {
@@ -19,6 +14,13 @@ public class Game {
 
     // Parameterized constructor to initialize Game with specific values
     public Game(int id, String gameName, int basePointPerRound) {
+        if (id == 0)
+            throw new IllegalArgumentException("Id cannot be 0");
+        if (basePointPerRound == 0)
+            throw new IllegalArgumentException("Base point per round cannot be 0");
+        if (gameName == null)
+            throw new NullPointerException();
+
         this.id = id;
         this.name = gameName;
         this.basePointPerRound = basePointPerRound;
@@ -41,6 +43,6 @@ public class Game {
 
     // Returns a string representation of the Game object
     public String toString() {
-        return "Id: " + id + " Name: " + name + " BasePoingPerRound: " + basePointPerRound;
+        return "Id: " + getId() + " Name: " + getName() + " BasePoingPerRound: " + getBasePointPerRound();
     }
 }
