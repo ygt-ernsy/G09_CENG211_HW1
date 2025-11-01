@@ -156,7 +156,6 @@ public class Match {
 
     @Override
 	public String toString() {
-		String gamerName = (this.gamer != null) ? this.gamer.getNickname() : "null";
 
 		return "Match ID:" + this.id +
 				"\nGames: " + Arrays.toString(this.games) +
