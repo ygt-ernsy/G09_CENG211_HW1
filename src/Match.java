@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Match
  * 
@@ -155,15 +157,15 @@ public class Match {
     }
 
     @Override
-	public String toString() {
+    public String toString() {
 
-		return "Match ID:" + this.id +
-				"\nGames: " + Arrays.toString(this.games) +
-				"\nRounds: " + Arrays.toString(this.rounds) +
-				"\nPoints: " + this.matchPoints +
-				"\nRaw Points: " + this.rawPoints +
-				"\nSkill Points: " + this.skillPoints +
-				"\nBonus Points: " + this.bonusPoints +
-				"\nMatch Points: " + this.matchPoints;
-	}
+        return "Match ID:" + this.id +
+                "\nGames: " + Arrays.toString(this.games) +
+                "\nRounds: " + Arrays.toString(this.rounds) +
+                "\nPoints: " + this.matchPoints +
+                "\nRaw Points: " + this.rawPoints +
+                "\nSkill Points: " + this.skillPoints +
+                "\nBonus Points: " + this.bonusPoints +
+                "\nMatch Points: " + this.matchPoints;
+    }
 }
