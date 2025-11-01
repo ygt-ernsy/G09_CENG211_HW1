@@ -1,3 +1,5 @@
+import java.sql.SQLOutput;
+
 public class Query {
     private Gamer[] allGamers;
     private Match[][] allMatches;
@@ -39,13 +41,7 @@ public class Query {
 
         // Print the results in the specified format
         System.out.println("Highest-Scoring Match:");
-        System.out.println("Match ID: " + highestMatch.getId());
-        System.out.println("Games: " + highestMatch.getGames());
-        System.out.println("Rounds: " + highestMatch.getRounds());
-        System.out.println("Raw Points: " + highestMatch.getRawPoints());
-        System.out.println("Skill Points: " + highestMatch.getSkillPoints());
-        System.out.println("Bonus Points: " + highestMatch.getBonusPoints());
-        System.out.println("Match Points: " + highestMatch.getMatchPoints());
+        System.out.println(highestMatch.toString());
     }
     /**
      * Query 2: Finds the lowest-scoring match and the most contributing game within it.
@@ -81,13 +77,7 @@ public class Query {
 
         // Print all results
         System.out.println("Lowest-Scoring Match:");
-        System.out.println("Match ID: " + lowestMatch.getId());
-        System.out.println("Games: " + lowestMatch.getGames());
-        System.out.println("Rounds: " + lowestMatch.getRounds());
-        System.out.println("Raw Points: " + lowestMatch.getRawPoints());
-        System.out.println("Skill Points: " + lowestMatch.getSkillPoints());
-        System.out.println("Bonus Points: " + lowestMatch.getBonusPoints());
-        System.out.println("Match Points: " + lowestMatch.getMatchPoints());
+        System.out.println(lowestMatch.toString());
         System.out.println("Most Contributing Game in this Match:");
         System.out.println("Game: " + topGame.getName());
         System.out.println("Contribution: " + topGameRounds + " rounds * " + topGame.getBasePointPerRound() + " points = " + maxContribution);
