@@ -26,20 +26,67 @@ public class PointsBoard {
 		this.matches = matches;
 
 		this.totalPoints = calculateTotalPoints();
-		this.averagePointPerMatch = calculateAvaragePointsPerMatch(totalPoints);
+		this.averagePointPerMatch = calculateAveragePointsPerMatch(totalPoints);
 		this.gamerMedal = calculateGamerMedal(totalPoints);
 	}
 
 	private int[] calculateTotalPoints() {
+        int numberOfGamers = this.gamers.length;
+        int [] totalPoints = new int[numberOfGamers];
 
+
+        for(int eachGamer = 0; eachGamer < numberOfGamers; eachGamer++) {
+            int gamerTotal = 0;
+
+            for(int eachMatch = 0; eachMatch < 15; eachMatch++) {
+                Match match = this.matches[eachGamer][eachMatch];
+                gamerTotal += match.getMatchPoints();
+            }
+            totalPoints[eachGamer] = gamerTotal;
+        }
+        return totalPoints;
 	}
 
-	private double[] calculateAvaragePointsPerMatch(int[] totalPoints) {
+	private double[] calculateAveragePointsPerMatch(int[] totalPoints) {
 
+       double [] averagePoints = new double[totalPoints.length];
+
+       for (int eachGamer = 0; eachGamer < totalPoints.length; eachGamer++) {
+           double gamerAverage = 0;
+           gamerAverage = (double)totalPoints[eachGamer] / 15.0;
+           averagePoints[eachGamer] = gamerAverage;
+       }
+       return averagePoints;
 	}
 
 	private String[] calculateGamerMedal(int[] totalPoints) {
+        String [] gamerMedal = new String[totalPoints.length];
+
+        for (int eachGamer = 0; eachGamer < totalPoints.length; eachGamer++) {
+            String medal = assignMedal(totalPoints[eachGamer]);
+            gamerMedal[eachGamer] = medal;
+        }
+        return gamerMedal;
+
 	}
+    private  String assignMedal(int totalScore){
+        String medal;
+
+        if(totalScore >= 2000){
+            medal = "GOLD";
+
+        }
+        else if(totalScore >= 1200){
+            medal = "SILVER";
+        }
+        else if (totalScore >= 700){
+            medal = "BRONZE";
+        }
+        else{
+            medal = "NONE";
+        }
+        return medal;
+    }
 
 	public int[] getTotalPoints() {
 
