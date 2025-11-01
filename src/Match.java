@@ -155,14 +155,16 @@ public class Match {
     }
 
     @Override
-    public String toString() {
-        String gamerName = (this.gamer != null) ? this.gamer.getNickname() : "null";
+	public String toString() {
+		String gamerName = (this.gamer != null) ? this.gamer.getNickname() : "null";
 
-        return "Match ID:" + this.id +
-                "\nGamer: " + gamerName +
-                "\nPoints: " + this.matchPoints +
-                "\nR: " + this.rawPoints +
-                "\nS: " + this.skillPoints +
-                "\nB: " + this.bonusPoints;
-    }
+		return "Match ID:" + this.id +
+				"\nGames: " + Arrays.toString(this.games) +
+				"\nRounds: " + Arrays.toString(this.rounds) +
+				"\nPoints: " + this.matchPoints +
+				"\nRaw Points: " + this.rawPoints +
+				"\nSkill Points: " + this.skillPoints +
+				"\nBonus Points: " + this.bonusPoints +
+				"\nMatch Points: " + this.matchPoints;
+	}
 }
