@@ -1,29 +1,29 @@
-import java.sql.SQLOutput;
-
 public class Query {
     private Gamer[] allGamers;
     private Match[][] allMatches;
     private int totalGamers;
-    private int matchesPerGamer = 15;
+    private final int matchesPerGamer = 15;
+    private PointsBoard pointsBoard;
 
     // Constructor to receive the finalized data
     public Query(Gamer[] allGamers, Match[][] allMatches) {
         this.allGamers = allGamers;
         this.allMatches = allMatches;
         this.totalGamers = allGamers.length;
+        this.pointsBoard = new PointsBoard(allGamers,allMatches);
     }
 
     public void printAllQueries() {
         printHighestScoringMatch();
-        System.out.println("\n---"); // Ayıraç
+        System.out.println("\n---");
         printLowestScoringMatch();
-        System.out.println("\n---"); // Ayıraç
+        System.out.println("\n---");
         printLowestBonusPoints();
-        System.out.println("\n---"); // Ayıraç
+        System.out.println("\n---");
         printHighestScoringGamer();
-        System.out.println("\n---"); // Ayıraç
+        System.out.println("\n---");
         printTotalTournamentPoints();
-        System.out.println("\n---"); // Ayıraç
+        System.out.println("\n---");
         printMedalDistribution();
     }
 
@@ -98,37 +98,31 @@ public class Query {
         }
 
         System.out.println("Match with Lowest Bonus Points:");
-        System.out.println("Match ID: " + lowestBonusMatch.getId());
-        System.out.println("Games: " + lowestBonusMatch.getGames());
-        System.out.println("Skill Points: " + lowestBonusMatch.getSkillPoints());
-        System.out.println("Bonus Points: " + lowestBonusMatch.getBonusPoints());
-        System.out.println("Match Points: " + lowestBonusMatch.getMatchPoints());
+        System.out.println(lowestBonusMatch.toString());
     }
     /**
      * Query 4: Finds and prints the highest-scoring gamer.
      */
     public void printHighestScoringGamer() {
         // 1. Assume the first gamer is the highest to start.
-        Gamer highestGamer = allGamers[0];
+        int highestGamerIndex = 0;
 
         // 2. Loop through the rest of the gamers
         for (int gamerIndex = 1; gamerIndex < totalGamers; gamerIndex++) {
             // 3. Compare and update the champion
-            if (allGamers[gamerIndex].getTotalPoints() > highestGamer.getTotalPoints()) {
-                highestGamer = allGamers[gamerIndex];
+            if (pointsBoard.getTotalPoints()[gamerIndex] > pointsBoard.getTotalPoints()[highestGamerIndex]) {
+                highestGamerIndex = gamerIndex;
             }
         }
-
+        Gamer highestGamer = allGamers[highestGamerIndex];
+        int totalPoints = pointsBoard.getTotalPoints()[highestGamerIndex];
         // 4. Print the winner's details
         System.out.println("Highest-Scoring Gamer:");
         System.out.println("Nickname: " + highestGamer.getNickname());
         System.out.println("Name: " + highestGamer.getName());
-        System.out.println("Total Points: " + highestGamer.getTotalPoints());
-
-        // 5. Format the average to 2 decimal places
-        String avgFormatted = String.format("%.2f", highestGamer.getAveragePointsPerMatch());
-        System.out.println("Average Per Match: " + avgFormatted);
-        System.out.println("Medal: " + highestGamer.getMedal());
+        System.out.println("Total Points: " + totalPoints);
+        System.out.println("Average Per Match: " + (double)totalPoints/15);
+        System.out.println("Medal: " + pointsBoard.getGamerMedal()[highestGamerIndex]);
     }
 
     /**
@@ -154,45 +148,43 @@ public class Query {
     /**
      * Query 6: Calculates and prints the medal distribution.
      */
-//    public void printMedalDistribution() {
-//        // 1. Create counters for each medal type
-//        int goldCount = 0;
-//        int silverCount = 0;
-//        int bronzeCount = 0;
-//        int noneCount = 0;
-//
-//        // 2. Loop through all gamers
-//        for (int i = 0; i < totalGamers; i++) {
-//            String medal = allGamers[i].getMedal();
-//
-//            // 3. Increment the correct counter based on the gamer's medal
-//            switch (medal) {
-//                case "GOLD":
-//                    goldCount++;
-//                    break;
-//                case "SILVER":
-//                    silverCount++;
-//                    break;
-//                case "BRONZE":
-//                    bronzeCount++;
-//                    break;
-//                case "NONE":
-//                    noneCount++;
-//                    break;
-//            }
-//        }
-//
-//        // 4. Calculate percentages using double-precision division
-//        double goldPercent = (double) goldCount / totalGamers * 100.0;
-//        double silverPercent = (double) silverCount / totalGamers * 100.0;
-//        double bronzePercent = (double) bronzeCount / totalGamers * 100.0;
-//        double nonePercent = (double) noneCount / totalGamers * 100.0;
-//
-//        // 5. Print the formatted results
-//        System.out.println("Medal Distribution:");
-//        System.out.println("GOLD: " + goldCount + " gamers (" + String.format("%.1f", goldPercent) + "%)");
-//        System.out.println("SILVER: " + silverCount + " gamers (" + String.format("%.1f", silverPercent) + "%)");
-//        System.out.println("BRONZE: " + bronzeCount + " gamers (" + String.format("%.1f", bronzePercent) + "%)");
-//        System.out.println("NONE: " + noneCount + " gamers (" + String.format("%.1f", nonePercent) + "%)");
-//    }
+    public void printMedalDistribution() {
+        // 1. Create counters for each medal type
+        int goldCount = 0;
+        int silverCount = 0;
+        int bronzeCount = 0;
+        int noneCount = 0;
+
+        // 2. Loop through all gamers
+        for (String medal : pointsBoard.getGamerMedal()){
+            // 3. Increment the correct counter based on the gamers medal
+            switch (medal) {
+                case "GOLD":
+                    goldCount++;
+                    break;
+                case "SILVER":
+                    silverCount++;
+                    break;
+                case "BRONZE":
+                    bronzeCount++;
+                    break;
+                case "NONE":
+                    noneCount++;
+                    break;
+            }
+        }
+
+        // 4. Calculate percentages using double-precision division
+        double goldPercent = (double) goldCount / totalGamers * 100.0;
+        double silverPercent = (double) silverCount / totalGamers * 100.0;
+        double bronzePercent = (double) bronzeCount / totalGamers * 100.0;
+        double nonePercent = (double) noneCount / totalGamers * 100.0;
+
+        // 5. Print the formatted results
+        System.out.println("Medal Distribution:");
+        System.out.println("GOLD: " + goldCount + " gamers (" + String.format("%.1f", goldPercent) + "%)");
+        System.out.println("SILVER: " + silverCount + " gamers (" + String.format("%.1f", silverPercent) + "%)");
+        System.out.println("BRONZE: " + bronzeCount + " gamers (" + String.format("%.1f", bronzePercent) + "%)");
+        System.out.println("NONE: " + noneCount + " gamers (" + String.format("%.1f", nonePercent) + "%)");
+    }
 }
