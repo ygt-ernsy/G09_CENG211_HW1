@@ -1,17 +1,30 @@
 /**
- * PointsBoard
+ * PointsBoard manages and calculates information related to a group of gamers and their match results.
+ * It stores the gamers, their matches, calculates total and average points, and determines medals for each gamer.
  */
 public class PointsBoard {
+    // Array of all gamers participating
     private final Gamer[] gamers;
+    // 2D array representing matches for each gamer
     private Match[][] matches;
+    // Total points scored by each gamer
     private final int[] totalPoints;
+    // Average points per match for each gamer
     private final double[] averagePointPerMatch;
+    // Medal awarded to each gamer based on total points
     private final String[] gamerMedal;
 
+    /**
+     * Default constructor. Initializes with no gamers and no matches.
+     */
     public PointsBoard() {
         this(null, null);
     }
 
+    /**
+     * Copy constructor. Creates a deep copy of another PointsBoard.
+     * @param pointsBoard the PointsBoard instance to copy
+     */
     public PointsBoard(PointsBoard pointsBoard) {
         this.gamers = pointsBoard.getGamers();
         this.matches = pointsBoard.getMatches();
@@ -21,6 +34,12 @@ public class PointsBoard {
         this.gamerMedal = pointsBoard.getGamerMedal();
     }
 
+    /**
+     * Main constructor. Initializes the board with gamers and their matches.
+     * Calculates total and average points and assigns medals.
+     * @param gamers Array of gamers
+     * @param matches 2D array of matches for each gamer
+     */
     public PointsBoard(Gamer[] gamers, Match[][] matches) {
         this.gamers = gamers;
         this.matches = matches;
@@ -30,6 +49,10 @@ public class PointsBoard {
         this.gamerMedal = calculateGamerMedal(totalPoints);
     }
 
+    /**
+     * Calculates total points for each gamer by summing up the points from all their matches.
+     * @return Array of total points for each gamer
+     */
     private int[] calculateTotalPoints() {
         int numberOfGamers = this.gamers.length;
         int[] totalPoints = new int[numberOfGamers];
@@ -46,6 +69,11 @@ public class PointsBoard {
         return totalPoints;
     }
 
+    /**
+     * Calculates the average points per match for each gamer.
+     * @param totalPoints Array of total points for each gamer
+     * @return Array of average points per match for each gamer
+     */
     private double[] calculateAveragePointsPerMatch(int[] totalPoints) {
 
         double[] averagePoints = new double[totalPoints.length];
@@ -58,6 +86,11 @@ public class PointsBoard {
         return averagePoints;
     }
 
+    /**
+     * Determines which medal (if any) each gamer receives based on their total points.
+     * @param totalPoints Array of total points for each gamer
+     * @return Array of medal strings for each gamer
+     */
     private String[] calculateGamerMedal(int[] totalPoints) {
         String[] gamerMedal = new String[totalPoints.length];
 
@@ -69,6 +102,11 @@ public class PointsBoard {
 
     }
 
+    /**
+     * Assigns a medal based on the total score.
+     * @param totalScore Total points of the gamer
+     * @return Medal as a string ("GOLD", "SILVER", "BRONZE", or "NONE")
+     */
     private String assignMedal(int totalScore) {
         String medal;
 
@@ -84,6 +122,10 @@ public class PointsBoard {
         return medal;
     }
 
+    /**
+     * Returns a copy of the array of total points for each gamer.
+     * @return Array of total points
+     */
     public int[] getTotalPoints() {
 
         if (this.totalPoints == null) {
@@ -100,6 +142,10 @@ public class PointsBoard {
         return tempArray;
     }
 
+    /**
+     * Returns a deep copy of the matches array.
+     * @return 2D array of Match objects
+     */
     public Match[][] getMatches() {
 
         if (this.matches == null) {
@@ -127,6 +173,10 @@ public class PointsBoard {
         return matchesCopy;
     }
 
+    /**
+     * Returns a copy of the array of gamers.
+     * @return Array of Gamer objects
+     */
     public Gamer[] getGamers() {
 
         if (this.gamers == null) {
@@ -143,6 +193,10 @@ public class PointsBoard {
         return tempArray;
     }
 
+    /**
+     * Returns a copy of the array of medals assigned to each gamer.
+     * @return Array of medal strings
+     */
     public String[] getGamerMedal() {
 
         if (this.gamerMedal == null) {
@@ -159,6 +213,10 @@ public class PointsBoard {
         return tempArray;
     }
 
+    /**
+     * Returns a copy of the array of average points per match for each gamer.
+     * @return Array of average points per match
+     */
     public double[] getAveragePointPerMatch() {
 
         if (this.averagePointPerMatch == null) {
