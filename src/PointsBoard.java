@@ -110,11 +110,11 @@ public class PointsBoard {
     private String assignMedal(int totalScore) {
         String medal;
 
-        if (totalScore >= 2000) {
+        if (totalScore >= 4400) {
             medal = "GOLD";
-        } else if (totalScore >= 1200) {
+        } else if (totalScore >= 3800) {
             medal = "SILVER";
-        } else if (totalScore >= 700) {
+        } else if (totalScore >= 3500) {
             medal = "BRONZE";
         } else {
             medal = "NONE";
@@ -166,7 +166,7 @@ public class PointsBoard {
             matchesCopy[i] = new Match[numMatches];
 
             for (int j = 0; j < numMatches; j++) {
-                matchesCopy[i][j] = this.matches[i][j];
+                matchesCopy[i][j] = new Match(this.matches[i][j]);
             }
         }
 
@@ -187,7 +187,7 @@ public class PointsBoard {
         Gamer[] tempArray = new Gamer[length];
 
         for (int i = 0; i < length; i++) {
-            tempArray[i] = gamers[i];
+            tempArray[i] = new Gamer(gamers[i]);
         }
 
         return tempArray;
