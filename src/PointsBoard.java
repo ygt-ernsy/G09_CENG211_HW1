@@ -15,13 +15,6 @@ public class PointsBoard {
     private final String[] gamerMedal;
 
     /**
-     * Default constructor. Initializes with no gamers and no matches.
-     */
-    public PointsBoard() {
-        this(null, null);
-    }
-
-    /**
      * Copy constructor. Creates a deep copy of another PointsBoard.
      * @param pointsBoard the PointsBoard instance to copy
      */
