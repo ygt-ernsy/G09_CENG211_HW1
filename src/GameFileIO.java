@@ -147,4 +147,9 @@ public class GameFileIO {
         }
 
     }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
 }
