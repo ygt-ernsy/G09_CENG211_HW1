@@ -15,8 +15,8 @@ public class EsportsManagementApp {
         Gamer[] allGamers;
 
         // Initialize file readers for games and gamers data
-        GameFileIO gameReader = new GameFileIO("games.csv");
-        GamersFileIO gamerReader = new GamersFileIO("gamers.csv");
+        GameFileIO gameReader = new GameFileIO("G09_CENG211_HW1-main/games.csv");
+        GamersFileIO gamerReader = new GamersFileIO("G09_CENG211_HW1-main/gamers.csv");
 
         // Load all games and gamers from their respective CSV files
         allGames = gameReader.getGames();
