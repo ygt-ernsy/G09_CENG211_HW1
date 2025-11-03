@@ -22,6 +22,12 @@ public class Query {
         this.pointsBoard = new PointsBoard(allGamers,allMatches);
     }
 
+    public Query() {
+        this.allGamers = new Gamer[0];
+        this.allMatches = new Match[0][0];
+        this.totalGamers = 0;
+        this.pointsBoard = new PointsBoard(allGamers,allMatches);
+    }
     /**
      * Prints the results of all queries in order, separated by "---"
      */
