@@ -16,6 +16,16 @@ public class GameFileIO {
     private String filePath; // Path to the CSV file containing game data
 
     /**
+    * Copy constructor
+    *
+    * @param GameFileIo object
+    */
+    public GameFileIO(GameFileIO gameFileIO) {
+        this.filePath = gameFileIO.getFilePath();
+    }
+
+    
+    /**
      * Constructor to initialize the file path.
      * 
      * @param filePath Path to the CSV file to be read
