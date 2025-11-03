@@ -122,7 +122,7 @@ public class MatchManagement {
         Game[] tempArray = new Game[length];
 
         for (int i = 0; i < length; i++) {
-            tempArray[i] = availableGames[i];
+            tempArray[i] = new Game(availableGames[i]);
         }
 
         return tempArray;
@@ -149,7 +149,7 @@ public class MatchManagement {
             matchesCopy[i] = new Match[this.matches[i].length];
 
             for (int j = 0; j < this.matches[i].length; j++) {
-                matchesCopy[i][j] = this.matches[i][j];
+                matchesCopy[i][j] = new Match(this.matches[i][j]);
             }
         }
 
@@ -166,7 +166,7 @@ public class MatchManagement {
         Gamer[] tempArray = new Gamer[length];
 
         for (int i = 0; i < length; i++) {
-            tempArray[i] = gamers[i];
+            tempArray[i] = new Gamer(gamers[i]);
         }
 
         return tempArray;
