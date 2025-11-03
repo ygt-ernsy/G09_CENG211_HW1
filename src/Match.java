@@ -78,8 +78,8 @@ public class Match {
      * @return The skill points as an integer
      */
     private int calculateSkillPoints() {
-        int gamerExperianceUsed = Math.min(gamer.getExperienceYears(), 10); // Max 10 years considered
-        double points = Math.floor(rawPoints * (1 + gamerExperianceUsed * 0.02)); // 2% per year
+        int gamerExperienceUsed = Math.min(gamer.getExperienceYears(), 10); // Max 10 years considered
+        double points = Math.floor(rawPoints * (1 + gamerExperienceUsed * 0.02)); // 2% per year
         return (int) points;
     }
 
@@ -136,9 +136,17 @@ public class Match {
         int length = games.length;
         Game[] tempGames = new Game[length];
         for (int i = 0; i < length; i++) {
-            tempGames[i] = games[i];
+            tempGames[i] = new Game(games[i]);
         }
         return tempGames;
+    }
+
+    public String[] getGamesName(Game[] games) {
+        String[] names = new String[games.length];
+        for (int i=0; i<games.length; i++) {
+            names[i] = games[i].getName();
+        }
+        return names;
     }
 
     /**
@@ -147,8 +155,7 @@ public class Match {
      * @return A copy of the gamer who played the match
      */
     public Gamer getGamer() {
-        Gamer tempGamer = new Gamer(gamer);
-        return tempGamer;
+        return new Gamer(gamer);
     }
 
     /** @return The bonus points awarded for this match */
@@ -160,7 +167,7 @@ public class Match {
     public String toString() {
 
         return "Match ID:" + this.id +
-                "\nGames: " + Arrays.toString(this.games) +
+                "\nGames: " + Arrays.toString(getGamesName(this.games)) +
                 "\nRounds: " + Arrays.toString(this.rounds) +
                 "\nPoints: " + this.matchPoints +
                 "\nRaw Points: " + this.rawPoints +
