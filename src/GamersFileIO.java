@@ -16,12 +16,6 @@ public class GamersFileIO {
     private String filePath; // Path to the CSV file containing gamer data
 
     /**
-     * Default constructor sets filePath to null.
-     */
-    public GamersFileIO() {
-    }
-
-    /**
      * Copy constructor
      *
      * @param gamersFileIO an object
