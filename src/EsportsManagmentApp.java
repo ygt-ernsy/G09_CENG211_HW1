@@ -5,7 +5,7 @@ import java.util.Random;
  * Handles loading of game and gamer data, simulates matches, and prints
  * statistics and results.
  */
-public class EsportsManagmentApp {
+public class EsportsManagementApp {
     public static void main(String[] args) {
 
         // Inform the user that the tournament simulation is starting
